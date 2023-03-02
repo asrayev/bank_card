@@ -21,7 +21,7 @@ Future<void> postCardToFirestore(CardModel cardCard) async {
       await FireStoreService(fireStore: _firestore).addCard(cardModel: cardCard);
       emit(PostCardSuccess());
     } catch (e) {
-      emit(CardError(message: e.toString()));
+
     }
   }
 
