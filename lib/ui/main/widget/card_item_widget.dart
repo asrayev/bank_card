@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: depend_on_referenced_packages
 import 'package:google_fonts/google_fonts.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_svg/svg.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../cubit/firestore_cubit.dart';
+import '../../../utils/icons.dart';
 class CardItemWidget extends StatelessWidget {
   final int index;
   final List<CardModel> data;
@@ -20,34 +26,27 @@ class CardItemWidget extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  height: 200.h,
-                  width: 400.w,
+                  height: 200,
+                  width: 400,
                   decoration: BoxDecoration(
                     // color: Color(hexColor(bankViewModel
                     //     .bankCart![index].colors!.colorA
                     //     .toString()) ??
                     //     ""),
                     borderRadius: BorderRadius.circular(30),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Color(hexColor(bankViewModel
-                    //         .bankCart![index].colors!.colorA
-                    //         .toString()) ??
-                    //         "")
-                    //         .withOpacity(0.5),
-                    //     blurRadius: 2,
-                    //     offset: Offset(3, 6), // Shadow position
-                    //   ),
-                    // ],
+                    color: Colors.green
+
                   ),
                 ),
-                // SvgPicture.asset(
-                //   MyIcon.cardbg,
-                //   color: Color(hexColor(bankViewModel
-                //       .bankCart![index].colors!.colorB
-                //       .toString()) ??
-                //       ""),
-                // ),
+                SvgPicture.asset(
+                  MyIcon.cardbg,
+                  color: Color(
+                    0xFF121212
+                      // hexColor(bankViewModel
+                      // .bankCart![index].colors!.colorB
+                      // .toString()) ??
+                      // ""),
+                ), height: 200, width: 400,),
                 SizedBox(
                   height: 200,
                   width: 400,
@@ -57,26 +56,24 @@ class CardItemWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Row(
-                        //     mainAxisAlignment: MainAxisAlignment.end,
-                        //     children: [
-
-                              // SvgPicture.asset(
-                              //   MyIcon.getIcon(cardModel
-                              //       .bankCart![index].cardType
-                              //       .toString()),
-                              //   width: 50,
-                              // )
-                            // ]),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children:  [
+                              InkWell(
+                                  onTap: ((){
+                                    BlocProvider.of<PostCardCubit>(context).deleteCardById(id: data[index].id);
+                                  }),
+                                  child: const Icon(Icons.delete, color: Colors.red,))
+                            ]),
                         const SizedBox(
                           height: 30,
                         ),
                         Row(
                           children: [
-                            // SvgPicture.asset(
-                            //   MyIcon.card,
-                            //   width: 50,
-                            // ),
+                            SvgPicture.asset(
+                              MyIcon.card,
+                              width: 50,
+                            ),
                             const SizedBox(
                               width: 20,
                             ),

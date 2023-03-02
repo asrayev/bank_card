@@ -14,22 +14,19 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Final Exam"),
         actions: const [
           Icon(Icons.add)
         ],
       ),
-      // body:  const Center(child: Text("Hello"),),
     body:  BlocBuilder<PostCardCubit,PostCardState>(
-      // listener: (context, state) {
-      //   context.read<PostCardCubit>().getAllCards();
-      // },
         builder: (context, state) {
           if(state is CardLoading){
-            return const CircularProgressIndicator.adaptive();
+            return const Center(child: CircularProgressIndicator.adaptive());
           }
           else if (state is GetCardSuccess){
             return SizedBox(
-              height: 600,
+              height: MediaQuery.of(context).size.height,
               child: ListView.builder(
                   itemCount: state.data.length,
                   itemBuilder: (context, index){

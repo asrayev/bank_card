@@ -33,5 +33,11 @@ Future<void> postCardToFirestore(CardModel cardCard) async {
 
   }
 
+  Future<void> deleteCardById({required id})async{
+  emit(CardLoading());
+  await FireStoreService(fireStore: _firestore).deleteCardById(id: id);
+
+  }
+
 
 }
