@@ -1,21 +1,26 @@
-abstract class PostModelState  {
-  const PostModelState();
+import '../data/model/card_model.dart';
 
-  @override
-  List<Object> get props => [];
+abstract class PostCardState  {
+  const PostCardState();
+
 }
 
-class PostModelInitial extends PostModelState {}
+class PostCardInitial extends PostCardState {}
 
-class PostModelLoading extends PostModelState {}
+class CardLoading extends PostCardState {}
 
-class PostModelSuccess extends PostModelState {}
+class PostCardSuccess extends PostCardState {}
 
-class PostModelError extends PostModelState {
+class GetCardSuccess extends PostCardState {
+  List<CardModel> data;
+
+  GetCardSuccess({required this.data});
+}
+
+
+class CardError extends PostCardState {
   final String message;
 
-  const PostModelError({required this.message});
+  const CardError({required this.message});
 
-  @override
-  List<Object> get props => [message];
 }

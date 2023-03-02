@@ -8,21 +8,30 @@ import 'firestore_state.dart';
 
 
 
-class PostModelCubit extends Cubit<PostModelState> {
+class PostCardCubit extends Cubit<PostCardState> {
   final FirebaseFirestore _firestore;
 
-  PostModelCubit({
+  PostCardCubit({
     required FirebaseFirestore firestore,
   })   : _firestore = firestore,
-        super(PostModelInitial());
-
-  Future<void> postCardModelToFirestore(CardModel cardModel) async {
-    emit(PostModelLoading());
+        super(PostCardInitial());
+Future<void> postCardToFirestore(CardModel cardCard) async {
+    emit(CardLoading());
     try {
-      await FireStoreService(fireStore: _firestore).addCard(cardModel: cardModel);
-      emit(PostModelSuccess());
+      await FireStoreService(fireStore: _firestore).addCard(cardModel: cardCard);
+      emit(PostCardSuccess());
     } catch (e) {
-      emit(PostModelError(message: e.toString()));
+      emit(CardError(message: e.toString()));
     }
   }
+
+  getAllCards(){
+    emit(CardLoading());
+    FireStoreService(fireStore: _firestore).getAllCards().listen((List<CardModel> cardModel) {
+      emit(GetCardSuccess(data: cardModel));});
+
+
+  }
+
+
 }

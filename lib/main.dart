@@ -19,7 +19,7 @@ void main()  async {
 
   runApp(MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => PostModelCubit(firestore: fireStore)),
+        BlocProvider(create: (context) => PostCardCubit(firestore: fireStore)..getAllCards()),
       ],
       child: const MyApp()));
 }
