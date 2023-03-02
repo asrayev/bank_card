@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../cubit/firestore_cubit.dart';
 import '../../data/model/card_model.dart';
 import '../../utils/constants.dart';
-
+import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,8 @@ TextEditingController cardNumController  = TextEditingController();
 TextEditingController expireDateController = TextEditingController();
 TextEditingController cardNameController  = TextEditingController();
 TextEditingController fullNameController  = TextEditingController();
-
+TextEditingController balanceController  = TextEditingController();
+Color picker = Color(0xFFFFFF);
 class _AddCardPageState extends State<AddCardPage> {
   @override
   Widget build(BuildContext context) {
@@ -59,8 +60,22 @@ class _AddCardPageState extends State<AddCardPage> {
               textEditingController: fullNameController,
             ),
             const SizedBox(height: 16),
-            // const CustomDropdown(),
+            CustomTextField(
+              text: "Balance",
+              type: TextInputType.number,
+              format: "",
+              textEditingController: balanceController,
+            ),
             const SizedBox(height: 16),
+            // const CustomDropdown(),
+            CircleColorPicker(
+              onChanged: (color) {
+                picker = color;
+              },
+              size: const Size(240, 240),
+              strokeWidth: 4,
+              thumbSize: 36,
+            ),
             InkWell(
                 onTap: () {
                   BlocProvider.of<PostCardCubit>(context).postCardToFirestore(
@@ -68,8 +83,8 @@ class _AddCardPageState extends State<AddCardPage> {
                           id: "",
                           cardNum: cardNumController.text,
                           expireDate: expireDateController.text,
-                          color: "",
-                          balance: "",
+                          color: picker.toString(),
+                          balance: balanceController.text,
                           bankName: cardNameController.text,
                           backup: fullNameController.text));
                   Navigator.pop(context);

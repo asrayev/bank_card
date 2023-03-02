@@ -16,13 +16,10 @@ class PostCardCubit extends Cubit<PostCardState> {
   })   : _firestore = firestore,
         super(PostCardInitial());
 Future<void> postCardToFirestore(CardModel cardCard) async {
-    emit(CardLoading());
-    try {
+      // emit(CardLoading());
       await FireStoreService(fireStore: _firestore).addCard(cardModel: cardCard);
       emit(PostCardSuccess());
-    } catch (e) {
 
-    }
   }
 
   getAllCards(){
@@ -34,7 +31,6 @@ Future<void> postCardToFirestore(CardModel cardCard) async {
   }
 
   Future<void> deleteCardById({required id})async{
-  emit(CardLoading());
   await FireStoreService(fireStore: _firestore).deleteCardById(id: id);
 
   }

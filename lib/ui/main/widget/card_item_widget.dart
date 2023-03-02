@@ -34,7 +34,7 @@ class CardItemWidget extends StatelessWidget {
                     //     .toString()) ??
                     //     ""),
                     borderRadius: BorderRadius.circular(30),
-                    color: Colors.green
+                    color: Color(int.parse(data[index].color.toString().substring(6,16)))
 
                   ),
                 ),

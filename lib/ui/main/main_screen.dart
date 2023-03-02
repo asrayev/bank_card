@@ -44,9 +44,9 @@ class MainScreen extends StatelessWidget {
           }else if (state is CardError){
             return Center(child: Text("${state.message} "));
           }else {
+            BlocProvider.of<PostCardCubit>(context).getAllCards();
             return const Center(child: Text("ERROR nima "));
           }
-
         }
         ),
     );

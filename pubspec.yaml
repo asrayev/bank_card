@@ -66,6 +66,7 @@ dev_dependencies:
   mask_text_input_formatter: ^2.3.0
   flutter_svg: ^1.1.5
   google_fonts: ^3.0.1
+  flutter_circle_color_picker: ^0.3.0
 
 
 # For information on the generic Dart part of this file, see the
